@@ -11,7 +11,7 @@ Static GitHub Pages portfolio (Astro + TypeScript + Svelte islands). No backend,
 - The banned-terms list is NOT in this repo and must never be committed, pasted into files, or echoed in output. It is read from `BANNED_TERMS_FILE` (a path outside the repo and outside OneDrive) locally, and the `BANNED_TERMS` secret in CI. The lint fails closed.
 - Run `npm run lint:banned` before every commit; the pre-commit and commit-msg hooks do this (`npm install` sets `core.hooksPath`).
 - Never commit-then-delete sensitive text: history is public. Start clean.
-- Repo stays private and the deploy job stays disabled (`if: false` in ci.yml) until the owner decides to go live.
+- The repo is public and the site is live (unlisted, `noindex`) at https://nao-mei.github.io/hello-world/. Every push to `main` deploys, so run the checks first and never push history or files that were not already scanned. The owner decides when to push.
 - Claude-drafted public text must be reviewed by the owner before publishing.
 
 ## Stack decisions
