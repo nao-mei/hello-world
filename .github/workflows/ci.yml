@@ -14,7 +14,6 @@ jobs:
     env:
       BANNED_TERMS: ${{ secrets.BANNED_TERMS }}
     steps:
-      # TODO: pin actions to commit SHAs.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
@@ -46,8 +45,8 @@ jobs:
           path: dist
 
   deploy:
-    # Stays disabled until the owner decides to go live. Remove `if: false` to go live.
-    if: false
+    # Runs only on pushes to main, after the build job passes.
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:

@@ -95,13 +95,13 @@ Full text in `CLAUDE.md`. Summary:
 
 ## 8. Making it public (go-live checklist)
 
-Do not start this until the owner says so. Order matters because public repos expose full history.
+This checklist has been followed and the site is live. It is kept for reference. Order mattered because public repos expose full history.
 
 1. **Owner review** of every drafted line (the owner can regenerate a reading copy of all page text from `dist/`) and of every factual claim (certifications, dates, award names, issuers).
 2. **Fresh scan**: run the banned lint over source, `dist/`, and the whole git history (`git log -p` through the lint, or scan a fresh clone). If any hit exists in history, rewrite history or start a new repo from a clean tree before going public. Safest is to publish a single clean commit of the final tree.
 3. **Hosting**: GitHub Pages is free for a public repo (a private repo needs a paid plan). The site is published from this repo through the Actions workflow.
 4. **Settings**: repo Settings, Pages, Source = GitHub Actions; confirm `base`/`site` in `astro.config.mjs` match the final URL (or set a custom domain and `base: '/'`).
-5. **CI**: pin actions to commit SHAs (the TODO in `ci.yml`), make sure the `BANNED_TERMS` secret is set, then remove `if: false` from the deploy job.
+5. **CI** (done): actions are pinned to commit SHAs, the `BANNED_TERMS` secret is set, and the deploy job runs on pushes to `main`. When you update an action, replace its SHA with the new release commit and keep the version as a comment.
 6. **Launch content**: the site is deliberately **unlisted**: `src/layouts/Base.astro` carries a `noindex` robots tag, so it is reachable by link but kept out of search engines (remove that tag only if the owner wants it indexed). The share image is `public/og.png` (generated from the name, tagline and three shapes; no screenshots or internal material), the favicon is `public/favicon.svg`, and `src/pages/404.astro` is the 404 page. Check `<title>` and meta on every page.
 7. **Final checks on the live URL**: axe/pa11y, Lighthouse (aim 90+), no third-party requests (network tab), keyboard and screen-reader pass, JS-off pass, phone check.
 8. **After launch**: update the LinkedIn link text, keep CI green, and re-run the banned lint whenever the list changes.
