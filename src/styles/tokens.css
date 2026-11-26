@@ -1,0 +1,29 @@
+/* Design tokens: deep blue ground, one bright-blue accent, hairlines. Always dark; the light set is kept for later and only applies with data-theme="light" on <html>.
+   scripts/check-contrast.mjs parses this file, so keep one `--name: #hex;` per line. */
+:root {
+  --bg: #0d1330;
+  --surface: #131b3d;
+  --fg: #e6ebf7;
+  --mut: #9aa6c8;
+  --line: #263059;
+  --accent: #4cb8f2;
+  --accent2: #a6dcf8;
+  --accent3: #8aa4ff;
+  --on-accent: #0d1330;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --bg: #f2f5fa;
+  --surface: #ffffff;
+  --fg: #0f1730;
+  --mut: #4a5677;
+  --line: #d0d8e8;
+  --accent: #0058ab;
+  --accent2: #0a3d73;
+  --accent3: #3a4fb8;
+  --on-accent: #ffffff;
+
+  color-scheme: light;
+}

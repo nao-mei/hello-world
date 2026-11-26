@@ -1,0 +1,31 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint:banned": "node scripts/lint-banned.mjs",
+    "test:lint": "node --test \"scripts/*.test.mjs\"",
+    "test:a11y": "pa11y-ci",
+    "test:contrast": "node scripts/check-contrast.mjs",
+    "prepare": "git config core.hooksPath .githooks"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.9.12",
+    "@astrojs/svelte": "9.1.0",
+    "@fontsource-variable/bricolage-grotesque": "5.3.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "astro": "7.4.1",
+    "svelte": "5.57.3",
+    "typescript": "6.0.3"
+  },
+  "devDependencies": {
+    "pa11y-ci": "5.0.0"
+  }
+}

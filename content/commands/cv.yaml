@@ -1,0 +1,10 @@
+name: Can I see your CV?
+group: more
+aliases:
+  - cv
+  - resume
+keywords: [cv, resume, curriculum, vitae, history, experience]
+href: https://www.linkedin.com/in/naomei/
+output: |-
+
+  Happy to share a fuller CV: just send me a message on LinkedIn.

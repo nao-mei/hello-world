@@ -1,0 +1,43 @@
+---
+import Case from '../../layouts/Case.astro';
+
+// Draft wording, for the owner to review before publishing.
+const glance: [string, string][] = [
+  ['What', 'A study app'],
+  ['Built with', 'Claude'],
+  ['Status', 'Experiment, in testing'],
+  ['Shown', 'Live, in your browser'],
+];
+---
+
+<Case title="AI product owner coach" glance={glance} link="https://nao-mei.github.io/aipo/" linkLabel="Open the coach">
+  <Fragment slot="head">
+    <h1>AI product owner <span class="mut">coach</span></h1>
+    <p class="lede">
+      A study app for learning what an AI product owner does, built with Claude's help. I made it to learn the role, and it is an experiment.
+    </p>
+  </Fragment>
+
+  <h2>Where it started</h2>
+  <p>
+    I wanted to understand what changes when the product is AI. The product owner is still accountable for the value of the product. What changes is the questions: is AI the right answer, what counts as good enough, and who checks it?
+  </p>
+
+  <h2>What I did</h2>
+  <p>
+    I built a study app that covers the role in nine topics, from framing the problem to evaluation, human oversight, risk and retirement. It has lessons, practice questions, scenarios, flashcards, spaced review and a study plan. It draws on public sources such as the Scrum Guide and the NIST AI risk framework, paraphrased and with versions pinned. It is designed for a phone and runs entirely in your browser: no accounts, and nothing is sent anywhere.
+  </p>
+
+  <h2>Honest status</h2>
+  <ul>
+    <li>It is an experiment.</li>
+    <li>The content was drafted with AI. I have reviewed some of it, but not all, so check it against the sources.</li>
+    <li>I have tested it on a phone and it works well. My main concern is that it may be too easy, so I am making it harder.</li>
+    <li>It is unofficial, and it is not legal or regulatory advice.</li>
+  </ul>
+
+  <h2>What I learned</h2>
+  <p>
+    Building a teaching tool is a good way to find what you do not yet understand. Writing a question forces you to say what the right answer is, and why the wrong ones are tempting.
+  </p>
+</Case>

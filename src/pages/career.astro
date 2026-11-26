@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CareerPath from '../components/CareerPath.astro';
+import EveryAngle from '../components/diagrams/EveryAngle.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const recognition = (await getCollection('recognition')).sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.year - a.data.year);
+const credentials = recognition.filter((r) => r.data.kind === 'credential').sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const cv = (await getCollection('links')).find((l) => l.id === 'request-cv');
+---
+
+<Base title="Every angle">
+  <section class="slide">
+    <div class="wrap">
+      <p class="kick"><i></i> 01 · Every angle</p>
+      <h1>Every angle, <span class="mut">one thread</span></h1>
+      <div class="head-split">
+        <p class="lede">I started by studying how people and minds work. Everything since has been another angle on the same question: how do people and technology really work together?</p>
+        <figure class="fig mini-head"><EveryAngle /></figure>
+      </div>
+      <CareerPath />
+
+      <h2 class="rh">The thread</h2>
+      <div class="story">
+        <p>
+          I studied psychology (MA Hons), then cognitive science (MSc) at the University of Edinburgh: how people and neural networks learn and understand language. When I started work I wanted both sides, people and technology. Service management showed me how things really run. Consulting taught me to listen to clients and ask the right questions. Supplier and sourcing work taught me that curiosity and openness beat old habits, and that win-win usually beats arm-wrestling.
+        </p>
+        <p>
+          Client partnership taught me collaboration, and that great teams value what each person brings. Now I bring all of those angles to making sense of problems in technology and AI, always with people in mind.
+        </p>
+      </div>
+
+
+      <h2 id="recognition">Credentials</h2>
+      <div class="recog single">
+        <div>
+          <h3 class="rh">Credentials</h3>
+          <ol class="ladder">
+            {credentials.map((r, i) => (
+              <li class={'step' + (i + 1)}>
+                <span class="hex" aria-hidden="true"></span>
+                {r.data.href ? <a href={r.data.href} target="_blank" rel="noopener noreferrer"><strong>{r.data.title}</strong></a> : <strong>{r.data.title}</strong>}
+                <span class="years">{r.data.issuer}, {r.data.year}</span>
+                {r.data.note && <span class="years">{r.data.note}</span>}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <p>Awards are on the <a href={`${base}/minds/`}>Minds page</a>.</p>
+      {cv && <p>Happy to share a fuller CV: <a href={cv.data.href} target="_blank" rel="noopener noreferrer">just send me a message on LinkedIn</a>.</p>}
+    </div>
+  </section>
+</Base>

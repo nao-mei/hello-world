@@ -1,0 +1,10 @@
+name: What's on this site?
+group: more
+aliases:
+  - ls ideas
+  - ls
+  - whats on this site
+output: |-
+
+  Three ideas, each with its own page: every angle (career), build it with people (making), fits more minds.
+  And this box.

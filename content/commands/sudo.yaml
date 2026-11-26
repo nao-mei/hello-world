@@ -1,0 +1,7 @@
+name: sudo make me a coffee
+group: fun
+aliases:
+  - sudo
+output: |-
+
+  naomei is not in the sudoers file. This incident will be reported.

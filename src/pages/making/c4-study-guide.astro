@@ -1,0 +1,46 @@
+---
+import Case from '../../layouts/Case.astro';
+
+// Draft wording, for the owner to review before publishing.
+const glance: [string, string][] = [
+  ['What', 'A study aid'],
+  ['Built with', 'Claude'],
+  ['Status', 'In use, unofficial'],
+  ['Shown', 'Live, in your browser'],
+];
+---
+
+<Case title="C⁴ study guide" glance={glance} link="https://nao-mei.github.io/c4-study/" linkLabel="Open the study guide">
+  <Fragment slot="head">
+    <h1>C⁴ <span class="mut">study guide</span></h1>
+    <p class="lede">
+      A study aid for Claude's certification exams, built with Claude's help. I used it to pass the Claude Certified Developer – Foundations and Architect – Professional exams.
+    </p>
+  </Fragment>
+
+  <h2>Where it started</h2>
+  <p>
+    I was preparing for Claude's certification exams myself, and wanted a study aid I could keep improving as I went.
+  </p>
+
+  <h2>What I did</h2>
+  <p>
+    I built the guide with Claude's help. It runs entirely in your browser: no accounts, and nothing is sent anywhere.
+  </p>
+
+  <h2>Did it work?</h2>
+  <p>
+    I used it to prepare for the Claude Certified Developer – Foundations and Architect – Professional exams, and passed both. I keep using it for the exams that follow.
+  </p>
+
+  <h2>Honest by design</h2>
+  <ul>
+    <li>It is unofficial, and says so before you start.</li>
+    <li>It was drafted with AI, and says that too, so you know to check it against the official material.</li>
+  </ul>
+
+  <h2>What I learned</h2>
+  <p>
+    The best study tool is one that shows you your own gaps. Building it taught me as much as using it, and doing both is why I trust it.
+  </p>
+</Case>

@@ -1,0 +1,8 @@
+name: Is this an official site?
+group: more
+aliases:
+  - is this official
+keywords: [official, endorsed, represent, company]
+output: |-
+
+  No. The views here are my own.

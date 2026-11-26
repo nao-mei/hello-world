@@ -1,0 +1,61 @@
+---
+// Generic illustration: one tangled problem, seen from six sides. Says nothing about any engagement.
+const cx = 280;
+const cy = 150;
+const labels = ['People', 'Technology', 'Process', 'Journey', 'Product', 'Prompt'];
+const angles = labels.map((label, i) => {
+  const a = ((-90 + i * 60) * Math.PI) / 180;
+  const x = cx + 190 * Math.cos(a);
+  const y = cy + 105 * Math.sin(a);
+  const side = Math.abs(Math.cos(a)) < 0.2 ? 'mid' : Math.cos(a) > 0 ? 'right' : 'left';
+  return { label, x: +x.toFixed(1), y: +y.toFixed(1), side, i };
+});
+---
+
+<svg viewBox="0 0 560 305" role="img" aria-labelledby="d1t d1d" class="angle-fig">
+  <title id="d1t">Every angle</title>
+  <desc id="d1d">A tangled knot, the problem, sits in the middle. Six points around it stand for the people, technology, process, journey, product and prompt. Each in turn lights up and a line runs to the middle, so the problem is seen from every side.</desc>
+  <ellipse cx={cx} cy={cy} rx="190" ry="105" class="ghost" />
+  {angles.map((a) => <path d={`M${a.x} ${a.y} L${cx} ${cy}`} class="ln thin spoke" style={`--i:${a.i}`} />)}
+  <circle cx={cx} cy={cy} r="42" class="ring-d" />
+  <path d="M252 152 C256 124 308 122 306 152 C304 182 254 180 260 146 C264 120 302 136 296 160 C292 178 266 172 270 150 C272 138 288 142 284 154" class="ln acc tangle" />
+  <text x={cx} y={cy + 66} text-anchor="middle" class="sm halo">the problem</text>
+  {
+    angles.map((a) => (
+      <g>
+        <circle cx={a.x} cy={a.y} r="7" class="dot node" style={`--i:${a.i}`} />
+        <text
+          x={a.side === 'mid' ? a.x : a.side === 'right' ? a.x + 15 : a.x - 15}
+          y={a.side === 'mid' ? (a.y < cy ? a.y - 15 : a.y + 24) : a.y + 4}
+          text-anchor={a.side === 'mid' ? 'middle' : a.side === 'right' ? 'start' : 'end'}
+          class="lbl"
+          style={`--i:${a.i}`}
+        >
+          {a.label}
+        </text>
+      </g>
+    ))
+  }
+  <g class="mk"><circle cx="222" cy="198" r="9" /><text x="222" y="201.5">1</text></g>
+  <g class="mk"><circle cx="350" cy="98" r="9" /><text x="350" y="101.5">2</text></g>
+  <g class="mk"><circle cx="210" cy="98" r="9" /><text x="210" y="101.5">3</text></g>
+</svg>
+<ol class="steps">
+  <li><b>1</b> Start with the tangle</li>
+  <li><b>2</b> Look from every side</li>
+  <li><b>3</b> See what it really is</li>
+</ol>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .node, .spoke, .lbl { animation-duration: 9s; animation-iteration-count: infinite; animation-delay: calc(var(--i) * 1.5s); animation-timing-function: ease-in-out; }
+    .node { animation-name: lit-node; }
+    .spoke { animation-name: lit-spoke; }
+    .lbl { animation-name: lit-label; }
+    .tangle { stroke-dasharray: 5 4; animation: wander 14s linear infinite; }
+    @keyframes lit-node { 0%, 18%, 100% { fill: var(--surface); stroke: var(--mut); } 4%, 14% { fill: var(--accent); stroke: var(--accent); } }
+    @keyframes lit-spoke { 0%, 18%, 100% { stroke: var(--fg); stroke-opacity: 0.35; stroke-width: 1; } 4%, 14% { stroke: var(--accent); stroke-opacity: 1; stroke-width: 1.8; } }
+    @keyframes lit-label { 0%, 18%, 100% { fill: var(--fg); } 4%, 14% { fill: var(--accent2); } }
+    @keyframes wander { to { stroke-dashoffset: -90; } }
+  }
+</style>

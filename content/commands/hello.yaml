@@ -1,0 +1,8 @@
+name: hello
+aliases:
+  - hi
+  - hey
+hidden: true
+output: |-
+
+  Hello. Press / any time to open this again.

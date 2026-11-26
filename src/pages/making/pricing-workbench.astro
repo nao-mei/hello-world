@@ -1,0 +1,83 @@
+---
+import Case from '../../layouts/Case.astro';
+
+// Draft wording, for the owner to review before publishing. Anonymised: no tool names, figures or clients.
+const shifts = [
+  { from: 'Generate a deliverable', to: 'Build the thing that generates deliverables' },
+  { from: 'Make a task faster', to: 'Design the system around it: rules, controls, who uses it' },
+  { from: 'Copy the spreadsheet logic', to: 'Model the logic properly, so others can trust it' },
+];
+---
+
+<Case title="From spreadsheet to working tool" glance={[['What','A pricing tool'],['Built with','Claude'],['Status','Prototype'],['Shown','Described, not demoed']]}>
+      <Fragment slot="head">
+        <h1>From spreadsheet to <span class="mut">working tool</span></h1>
+        <p class="lede">
+          A multi-step pricing process became a live tool where scenarios can be adjusted in real time, with approval-ready outputs. I built and tested it myself before asking anyone else to build it.
+        </p>
+      </Fragment>
+
+      <h2>Where it started</h2>
+      <p>
+        Pricing is complex. I built a rate card spreadsheet of my own, and my team now uses it to produce new rate cards. It worked, but it still took several manual steps, and every what-if meant repeating them. Going further meant either asking AI for one-off outputs, or mobilising a design and development team before I could even test the idea.
+      </p>
+
+      <h2>What I did</h2>
+      <p>
+        I framed the problem first: who uses this, what decisions it supports, and what a good answer looks like. Then I built it in layers, checking each against the source logic. The result was a working prototype that people could change and try.
+      </p>
+      <p>
+        Most of the effort was not prompting. It was deciding what should exist: the workflow, the user journey and the rules. The prompts were the interface to that thinking.
+      </p>
+
+      <h2>What changed</h2>
+      <ul class="shifts">
+        {shifts.map((s) => (
+          <li><span>{s.from}</span><span class="arrow" aria-hidden="true">→</span><strong>{s.to}</strong></li>
+        ))}
+      </ul>
+      <p>
+        The question moved from "can AI generate this?" to "should anyone be generating this by hand?" Once the answer was no, the work became building a tool, and a tool needs usability, governance and upkeep that a document never does.
+      </p>
+
+      <h2>Knowing what each tool is for</h2>
+      <p>
+        I was an early adopter of both Copilot and Claude, and among the first twenty in my organisation to earn the Claude Certified Architect certification, and the first at my level and in my department. Using them side by side taught me that it is less about which tool wins and more about AI fluency: knowing what each is for.
+      </p>
+      <p>
+        I use them together, and they do different things.
+      </p>
+      <div class="pair">
+        <div>
+          <h3>Copilot</h3>
+          <p>Does a lot, and I can use it freely all day. It sits in the flow of work, close to enterprise data: find a document, check a transcript, look at my calendar, draft an email. Because it is so widely available, an agent built in it can help lots of colleagues. It <strong>contracts the time I spend thinking</strong> about routine things.</p>
+        </div>
+        <div>
+          <h3>Claude</h3>
+          <p>More deliberate, considered and expansive. Framing a problem, challenging it, designing a system, building a prototype. I reach for it when the thinking matters. It <strong>expands my thinking</strong>.</p>
+        </div>
+      </div>
+
+      <h2>What I would tell others</h2>
+      <ul>
+        <li>Frame the problem before you open the tool. Most of the value is decided there.</li>
+        <li>Ask whether you should keep making the output, or build what makes it.</li>
+        <li>Give ambitious building work the room it needs: real thinking time, and enough capacity.</li>
+        <li>Say what the tool cannot do, and who should check its answers.</li>
+      </ul>
+
+</Case>
+
+<style>
+  .shifts { list-style: none; padding: 0; margin: 1rem 0 1.25rem; display: grid; gap: 0.6rem; }
+  .shifts li { display: grid; grid-template-columns: 1fr auto 1.4fr; gap: 0.75rem; align-items: baseline; padding: 0.75rem 1rem; border: 1px solid var(--line); background: var(--surface); }
+  .shifts li span:first-child { color: var(--mut); }
+  .shifts .arrow { color: var(--accent); }
+  @media (max-width: 640px) { .shifts li { grid-template-columns: 1fr; gap: 0.15rem; } .shifts .arrow { display: none; } }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+  .pair > div { padding: 1rem 1.1rem; border: 1px solid var(--line); background: var(--surface); }
+  .pair h3 { margin: 0 0 0.4rem; font: 500 1.1rem var(--font-display); color: var(--accent); }
+  .pair p { margin: 0; color: var(--mut); font-size: 0.97rem; }
+  .pair strong { color: var(--fg); font-weight: 500; }
+</style>

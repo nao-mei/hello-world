@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks commits whose staged content or filenames match the local banned list.
+# Needs BANNED_TERMS_FILE pointing outside this repo (see CLAUDE.md).
+exec node scripts/lint-banned.mjs --staged

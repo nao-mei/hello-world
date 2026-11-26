@@ -1,0 +1,63 @@
+---
+// Illustration of an idea (not a screenshot of any real tool): a friction goes in, what has worked for people comes out.
+const answers = [58, 132, 206];
+const zig = 'M30 150 l14 -26 l14 52 l14 -52 l14 52 l14 -26 H150';
+---
+
+<svg viewBox="0 0 560 305" role="img" aria-labelledby="agt agd" class="agent-fig">
+  <title id="agt">Friction in, what has worked out</title>
+  <desc id="agd">A jagged line labelled friction at work leads into a box labelled agent. From the agent, three answers come out one after another, each marked with a tick and labelled what has worked for people.</desc>
+  <path d={zig} class="ln thin zig" />
+  <text x="30" y="200" class="sm">friction at work</text>
+  <path d="M150 150 H212" class="ln acc feed" />
+  <rect x="212" y="102" width="132" height="96" class="box agentbox" />
+  <text x="278" y="156" text-anchor="middle">agent</text>
+  <g class="think" aria-hidden="true">
+    <circle cx="256" cy="178" r="3" /><circle cx="278" cy="178" r="3" /><circle cx="300" cy="178" r="3" />
+  </g>
+  {
+    answers.map((y, i) => (
+      <g class="ans" style={`--i:${i}`}>
+        <path d={`M344 150 C372 150 372 ${y + 20} 396 ${y + 20}`} class="ln thin" />
+        <rect x="396" y={y} width="140" height="40" class="box" />
+        <path d={`M410 ${y + 20} l6 6 l12 -12`} class="ln acc" />
+        <path d={`M442 ${y + 20} h78`} class="ghost" />
+      </g>
+    ))
+  }
+  <text x="536" y="272" text-anchor="end" class="sm">what has worked</text>
+  <g class="trav" aria-hidden="true">
+    <circle r="4" class="tdot">
+      <animateMotion dur="6s" repeatCount="indefinite" path={`${zig} H212`} />
+    </circle>
+  </g>
+  <g class="mk"><circle cx="90" cy="100" r="9" /><text x="90" y="103.5">1</text></g>
+  <g class="mk"><circle cx="278" cy="72" r="9" /><text x="278" y="75.5">2</text></g>
+  <g class="mk"><circle cx="466" cy="24" r="9" /><text x="466" y="27.5">3</text></g>
+</svg>
+<ol class="steps">
+  <li><b>1</b> A friction at work</li>
+  <li><b>2</b> The agent draws on what has worked</li>
+  <li><b>3</b> Real options come back</li>
+</ol>
+
+<style>
+  .agentbox { stroke: var(--accent); }
+  .tdot { fill: var(--accent); filter: drop-shadow(0 0 4px var(--accent)); }
+  .think circle { fill: var(--mut); }
+  @media (prefers-reduced-motion: reduce) { .trav { display: none; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .ans { animation: pop 6s ease-in-out infinite; animation-delay: calc(3.6s + var(--i) * 0.5s); animation-fill-mode: backwards; }
+    @keyframes pop {
+      0% { opacity: 0.1; }
+      8%, 80% { opacity: 1; }
+      92%, 100% { opacity: 0.1; }
+    }
+    .think circle { animation: dots 1.2s ease-in-out infinite; }
+    .think circle:nth-child(2) { animation-delay: 0.2s; }
+    .think circle:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dots { 0%, 100% { fill: var(--mut); } 50% { fill: var(--accent); } }
+    .agentbox { animation: glow 6s ease-in-out infinite; animation-delay: 3s; }
+    @keyframes glow { 0%, 100% { filter: none; } 30%, 50% { filter: drop-shadow(0 0 8px var(--accent)); } }
+  }
+</style>

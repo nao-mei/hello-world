@@ -1,0 +1,37 @@
+---
+import Case from '../../layouts/Case.astro';
+
+// Draft wording, for the owner to review before publishing. Mirrors the public LinkedIn post.
+const glance: [string, string][] = [
+  ['What', 'A learning method'],
+  ['Built with', 'Claude'],
+  ['Status', 'Done, and repeatable'],
+  ['Shown', 'Story on LinkedIn'],
+];
+---
+
+<Case title="Certified in under a week" glance={glance} link="https://www.linkedin.com/posts/naomei_claude-certified-architect-foundations-share-7498394916474048517-ola7/" linkLabel="Read the story on LinkedIn">
+  <Fragment slot="head">
+    <h1>Certified in <span class="mut">under a week</span></h1>
+    <p class="lede">
+      From zero architecture knowledge to passing the Claude Certified Architect – Foundations exam in just under a week.
+    </p>
+  </Fragment>
+
+  <h2>Where it started</h2>
+  <p>
+    I started with no architecture knowledge, and under a week to go from there to passing.
+  </p>
+
+  <h2>What I did</h2>
+  <ol>
+    <li>Take mock exams and drills to find the gaps.</li>
+    <li>Feed the wrong answers back into Claude.</li>
+    <li>Turn them into a personalised study plan and a cheat sheet.</li>
+  </ol>
+
+  <h2>What I learned</h2>
+  <p>
+    Mistakes are the most useful input you have. Used well, an AI assistant can turn them into a plan, and a plan beats trying to cover everything. It is the same pattern as the rest of my work: spot the need, draft quickly, check it, and feed what went wrong back in.
+  </p>
+</Case>

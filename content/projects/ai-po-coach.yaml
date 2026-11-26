@@ -1,0 +1,11 @@
+title: AI product owner coach
+order: 5
+icon: guide
+case: ai-po-coach
+link: https://nao-mei.github.io/aipo/
+tags:
+  - Built with Claude
+  - Runs in your browser
+summary: >-
+  A study app for learning the AI product owner role, built with Claude's help as an experiment. It runs
+  entirely in your browser, and it is still being tested.

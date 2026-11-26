@@ -1,0 +1,59 @@
+---
+import Case from '../../layouts/Case.astro';
+import AgentIdea from '../../components/diagrams/AgentIdea.astro';
+
+// Draft wording, for the owner to review before publishing. Described, not demoed: no tool names, screenshots or quotes.
+---
+
+<Case title="An agent built on lived experience" glance={[['What','An AI agent'],['Built with','Copilot'],['Status','Built at work'],['Shown','Described, not demoed']]}>
+  <Fragment slot="head">
+    <h1>An agent built on <span class="mut">lived experience</span></h1>
+    <div class="head-split">
+      <p class="lede">
+      Workplace support usually starts with a process or a policy. This agent starts with what has actually worked for real people, and offers it back in plain language.
+      </p>
+      <figure class="fig mini-head"><AgentIdea /></figure>
+    </div>
+  </Fragment>
+
+  <h2>The problem</h2>
+  <p>
+    Neurodivergent people run into small frictions at work all the time: noise and focus, a vague meeting invite, how to ask for an adjustment, not knowing where to start. Policies describe what is allowed. They rarely say what helps, or who has tried it.
+  </p>
+
+  <h2>What it does</h2>
+  <p>
+    Someone describes the friction in their own words, or picks a common one. The agent answers with practical options drawn from people's real experience, one clear next step, and where to go for more. No diagnosis is needed, and it never asks for one.
+  </p>
+
+  <h2>Guardrails</h2>
+  <ul>
+    <li>It is peer-style support. It says plainly that it is not formal HR, legal or medical advice.</li>
+    <li>It points to the proper channels when something needs a real decision.</li>
+    <li>What it offers is grounded in shared experience, not invented by the model.</li>
+  </ul>
+
+  <h2>What building it taught me</h2>
+  <div class="pair">
+    <div>
+      <h3>Artefact is not product</h3>
+      <p>A rich, good-looking standalone version is easy to generate. A tool people can rely on needs the right data behind it, live interaction and someone looking after it.</p>
+    </div>
+    <div>
+      <h3>Choose the tool for the job</h3>
+      <p>The agent works best where it can use enterprise context. Rebuilding it elsewhere showed what each approach is good at, and what it costs.</p>
+    </div>
+  </div>
+
+  <p>
+    This was built at work, so I can describe it but not show it. The idea travels, though: start from what has worked for people, and make that easy to find.
+  </p>
+</Case>
+
+<style>
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+  .pair > div { padding: 1rem 1.1rem; border: 1px solid var(--line); background: var(--surface); }
+  .pair h3 { margin: 0 0 0.4rem; font: 500 1.1rem var(--font-display); color: var(--accent); }
+  .pair p { margin: 0; color: var(--mut); font-size: 0.97rem; }
+</style>

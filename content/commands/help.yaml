@@ -1,0 +1,7 @@
+name: help
+hidden: true
+aliases:
+  - "?"
+output: |-
+
+  Pick a question from the list, or just type something. A few answers are hidden.

@@ -1,0 +1,3 @@
+#!/bin/sh
+# History is public too: check the commit message as well.
+exec node scripts/lint-banned.mjs --message "$1"

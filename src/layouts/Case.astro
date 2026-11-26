@@ -1,0 +1,44 @@
+---
+// Shared frame for the write-up pages under /making/: same kicker, "at a glance" box, optional link out, and way back.
+import Base from './Base.astro';
+interface Props {
+  title: string;
+  glance: [string, string][];
+  link?: string | undefined;
+  linkLabel?: string | undefined;
+}
+const { title, glance, link, linkLabel = 'Open it' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Base title={title}>
+  <section class="slide">
+    <div class="wrap prose">
+      <p class="kick"><i></i> Creating with AI · Case study</p>
+      <slot name="head" />
+      <dl class="glance">
+        {glance.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+      {link && <p class="out"><a href={link} target="_blank" rel="noopener noreferrer">{linkLabel} ↗<span class="sr"> (opens in a new tab)</span></a></p>}
+      <slot />
+      <p class="note">Anonymised where needed.</p>
+      <p><a href={`${base}/making/`}>← Back to Build it with people</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prose { max-width: 46rem; }
+  .prose :global(.lede) { font-size: 1.2rem; color: var(--fg); margin: 1.25rem 0 1.5rem; line-height: 1.55; }
+  .prose :global(h2) { margin: 2.5rem 0 0.5rem; }
+  .prose :global(p), .prose :global(li) { line-height: 1.65; }
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.6rem; margin: 0 0 1.25rem; }
+  .glance > div { padding: 0.7rem 0.9rem; border: 1px solid var(--line); background: var(--surface); }
+  .glance dt { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .glance dd { margin: 0.2rem 0 0; color: var(--fg); font-size: 0.95rem; }
+  .out { margin: 0 0 0.5rem; }
+  .out a { display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-weight: 500; }
+  .out a:hover, .out a:focus-visible { background: var(--accent); color: var(--on-accent); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .note { color: var(--mut); font-size: 0.9rem; margin-top: 2.5rem; }
+</style>

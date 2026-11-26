@@ -1,0 +1,7 @@
+name: rm -rf /
+aliases:
+  - rm -rf
+hidden: true
+output: |-
+
+  Nice try. Everything here is static anyway.

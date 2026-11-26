@@ -1,0 +1,7 @@
+name: What is the study guide?
+group: more
+keywords: [study, guide, c4, coach, practise, mock, exam]
+href: https://nao-mei.github.io/c4-study/
+output: |-
+
+  A study aid for Anthropic's Claude certification exams, built with Claude's help, and the one I used to pass the Developer and Architect – Professional exams. It runs in your browser, is unofficial and AI-drafted, and says so up front.

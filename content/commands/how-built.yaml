@@ -1,0 +1,6 @@
+name: How was this site built?
+group: more
+keywords: [built, build, made, make, site, website, created, tech, stack, code]
+output: |-
+
+  With AI's help, mostly Claude, and a lot of iterating. It is a static site: no server, no tracking, no accounts.

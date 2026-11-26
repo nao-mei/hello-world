@@ -1,0 +1,68 @@
+---
+// Career as a connected path. Original monograms (not company logos). Earlier roles are grouped and undated.
+// The plain list below is the no-JavaScript view; the island replaces it when scripts run.
+import { getCollection } from 'astro:content';
+import CareerCarousel from '../islands/CareerCarousel.svelte';
+
+const all = await getCollection('roles');
+const recent = all.filter((r) => !r.data.earlyCareer).sort((a, b) => a.data.startYear - b.data.startYear);
+const earlier = all.filter((r) => r.data.earlyCareer).sort((a, b) => b.data.startYear - a.data.startYear);
+const mono = (employer: string) => (employer === 'Capgemini Invent' ? 'CI' : employer.trim().charAt(0).toUpperCase());
+
+const shortEmployer = (e: string) => (e.startsWith('RSA') ? 'RSA' : e.replace(/ Investments$/, ''));
+const earlyEmployers = [...new Set(earlier.map((r) => shortEmployer(r.data.employer)))];
+const earlyRoles = earlier.map((r) => `${r.data.title}, ${r.data.employer}`);
+
+const uniq = (xs: string[]) => [...new Set(xs)];
+// Draft wording for the owner to review.
+const earlyTheme = 'Studied how people and minds work, then learned how services, suppliers and projects really run.';
+const earlyLesson = 'Being new to something can be an advantage: no old habits, just curiosity, and working together beats fighting for ground.';
+const items = [
+  { id: 'earlier', name: 'Early career', mono: '', early: true, title: earlyEmployers.join(', '), theme: earlyTheme, lesson: earlyLesson, skills: uniq(['Psychology', 'Cognitive science', ...earlier.flatMap((r) => r.data.skills)]) },
+  ...recent.map((r) => ({
+    id: r.id,
+    name: r.data.employer,
+    mono: mono(r.data.employer),
+    title: r.data.title,
+    years: `${r.data.startYear} to ${r.data.endYear ?? 'present'}`,
+    current: r.data.endYear === null,
+    theme: r.data.theme,
+    lesson: r.data.lesson,
+    skills: r.data.skills,
+  })),
+];
+---
+
+<CareerCarousel client:only="svelte" items={items} earlyRoles={earlyRoles} />
+
+<ol class="path static-path" aria-label="Career path, earliest to most recent">
+  <li class="early">
+    <span class="node" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <div class="meta">
+      <strong>Early career</strong>
+      <ul>
+        {earlier.map((r) => <li>{r.data.title}, {r.data.employer}</li>)}
+      </ul>
+    </div>
+  </li>
+  {
+    recent.map((r) => {
+      const current = r.data.endYear === null;
+      return (
+        <li class={current ? 'now' : undefined} aria-current={current ? 'true' : undefined}>
+          <span class="node" aria-hidden="true">{mono(r.data.employer)}</span>
+          <div class="meta">
+            <strong>{r.data.employer}</strong>
+            <span>{r.data.title}</span>
+            <span class="years">
+              {r.data.startYear} to {r.data.endYear ?? 'present'}
+            </span>
+            {r.data.theme && <span>{r.data.theme}</span>}
+            {r.data.lesson && <span class="lesson">What it taught me: {r.data.lesson}</span>}
+            {r.data.skills.length > 0 && <span class="skills">{r.data.skills.join(' · ')}</span>}
+          </div>
+        </li>
+      );
+    })
+  }
+</ol>

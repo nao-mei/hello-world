@@ -1,0 +1,10 @@
+title: A pricing tool, from spreadsheet to product
+order: 1
+icon: workbench
+case: pricing-workbench
+tags:
+  - Built at work
+  - Case study
+summary: >-
+  A multi-step rate card spreadsheet became a live tool, with scenarios that adjust in real time. I built and
+  tested it myself before asking anyone else to.

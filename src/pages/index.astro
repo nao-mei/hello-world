@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ShapeObject from '../islands/ShapeObject.svelte';
+import DotName from '../islands/DotName.svelte';
+import EveryAngle from '../components/diagrams/EveryAngle.astro';
+import BuildTogether from '../components/diagrams/BuildTogether.astro';
+import FitsMoreMinds from '../components/diagrams/FitsMoreMinds.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ideas = (await getCollection('problems')).sort((a, b) => a.data.order - b.data.order);
+// The object scrolls down the home page to the matching tile; each tile then leads to its own page: 01 every angle -> career, 02 build it with people -> making, 03 fits more minds -> minds.
+const diagrams = [EveryAngle, BuildTogether, FitsMoreMinds];
+const dest = [`${base}/career/`, `${base}/making/`, `${base}/minds/`];
+const picker = ideas.map((idea, i) => ({ id: i + 1, name: idea.data.label, href: `#idea-${i + 1}` }));
+// Draft wording from the owner's own words, for her to review.
+const beliefs = [
+  { title: 'Everything is connected', text: 'People matter as much as the technology, and everyone sees the world through their own lens, so check perspectives.' },
+  { title: 'Design for different people', text: 'Nobody fits in a box, and nobody should have to. Different minds do brilliant things when you let them.' },
+  { title: 'Try things, keep going', text: 'Fail fast, learn from what does not work, figure out what does, and share it so others can too.' },
+  { title: 'Be curious', text: 'Read, learn, make art and try everything, because ideas come from everywhere.' },
+  { title: 'AI is about people', text: 'The worry is really about what people do with it. To be a force for good, you have to learn how to use it.' },
+  { title: 'Do the right thing', text: 'Care about it, even when it does not help you. Make things better, do good work, and try to leave the place better than you found it.' },
+];
+---
+
+<Base title="Naomei Cathcart">
+  <section class="hero" id="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kick"><i></i> Ideas · AI · People</p>
+        <h1 class="name-static">Naomei Cathcart</h1>
+        <DotName client:only="svelte" />
+        <p class="sub">
+          I help teams change how they work, <span class="hl">with technology, AI and people in mind.</span>
+        </p>
+        <p class="tagline">Same thing, different angle.</p>
+        <p class="explore">Turn the object, or choose an idea</p>
+      </div>
+      <ShapeObject client:load ideas={picker} />
+    </div>
+  </section>
+
+  <section class="slide" id="ideas" aria-labelledby="h-ideas">
+    <div class="wrap">
+      <p class="kick"><i></i> Three ideas</p>
+      <h2 id="h-ideas">How I think about <span class="mut">the work</span></h2>
+      <ul class="tiles">
+        {
+          ideas.map((idea, i) => {
+            const Diagram = diagrams[i]!;
+            return (
+              <li class="tile" id={`idea-${i + 1}`} data-idea={i + 1}>
+                <div class="tile-text">
+                  <svg class="tile-shape" viewBox="0 0 40 40" width="44" height="44" aria-hidden="true" focusable="false">
+                    {i === 0 && <circle cx="20" cy="20" r="15" />}
+                    {i === 1 && <rect x="6" y="6" width="28" height="28" />}
+                    {i === 2 && <path d="M20 5 L36 33 H4 Z" />}
+                  </svg>
+                  <span class="idx">0{i + 1}</span>
+                  <a class="tile-link" href={dest[i]}>
+                    <strong>{idea.data.label}</strong>
+                  </a>
+                  <p>{idea.data.summary}</p>
+                  <span class="go" aria-hidden="true">
+                    {['Every angle, and the career behind it', 'What I build, and how', 'Thinking differently'][i]} →
+                  </span>
+                  <a class="totop" href="#hero">↑ Back to the object</a>
+                </div>
+                <figure class="tile-fig" aria-hidden="false">
+                  <Diagram />
+                </figure>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide stand" id="stand" aria-labelledby="h-stand">
+    <div class="wrap">
+      <p class="kick"><i></i> What I stand for</p>
+      <h2 id="h-stand">The thread <span class="mut">behind it all</span></h2>
+      <ul class="beliefs">
+        {
+          beliefs.map((b) => (
+            <li>
+              <strong>{b.title}</strong>
+              <span>{b.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>

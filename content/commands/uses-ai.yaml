@@ -1,0 +1,6 @@
+name: Do you use AI to write this?
+group: more
+keywords: [ai, write, written, wrote, chatgpt, generated, copy, claude, gemini, copilot]
+output: |-
+
+  Yes. I draft with AI, then check and edit it myself.

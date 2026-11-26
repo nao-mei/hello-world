@@ -1,0 +1,21 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "timeout": 30000,
+    "chromeLaunchConfig": {
+      "args": [
+        "--no-sandbox"
+      ]
+    }
+  },
+  "urls": [
+    "http://localhost:4321/hello-world/",
+    "http://localhost:4321/hello-world/career/",
+    "http://localhost:4321/hello-world/making/",
+    "http://localhost:4321/hello-world/minds/",
+    "http://localhost:4321/hello-world/making/pricing-workbench/",
+    "http://localhost:4321/hello-world/making/lived-experience-agent/",
+    "http://localhost:4321/hello-world/making/c4-study-guide/",
+    "http://localhost:4321/hello-world/making/certified-in-a-week/"
+  ]
+}

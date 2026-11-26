@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import LoopRing from '../../islands/LoopRing.svelte';
+import CardIcon from '../../components/CardIcon.astro';
+import BuildTogether from '../../components/diagrams/BuildTogether.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const idea = (await getCollection('problems')).find((p) => p.id === 'build-with-people');
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+// Draft wording, for the owner to review. Mirrors how the study guide and the exam story actually went.
+const steps = [
+  { title: 'Spot the need', text: 'Start with a real problem, usually my own.' },
+  { title: 'Draft with AI', text: 'Claude, Copilot, sometimes ChatGPT or Gemini. Get to something usable quickly.' },
+  { title: 'Check it', text: 'Test it against the real source, and say what it cannot do.' },
+  { title: 'Use it, improve it', text: 'Feed what went wrong back in.' },
+];
+---
+
+<Base title="Build it with people">
+  <section class="slide built" id="making" aria-labelledby="h-making">
+    <div class="wrap">
+      <p class="kick"><i></i> 02 · Build it with people</p>
+      <h1 id="h-making" aria-label="Idea to reality">Idea to <span class="mut">re<span class="hl">a</span>l<span class="hl">i</span>ty</span></h1>
+      <div class="head-split">
+        <p class="lede">{idea?.data.summary}</p>
+        <figure class="fig mini-head"><BuildTogether /></figure>
+      </div>
+
+      <h2 class="rh examples">The pattern behind most of what I make</h2>
+      <LoopRing client:only="svelte" steps={steps} />
+      <div class="static-loop">
+        <ol class="steps4">
+          {
+            steps.map((s, i) => (
+              <li>
+                <span class="node" aria-hidden="true">{i + 1}</span>
+                <div class="meta">
+                  <strong>{s.title}</strong>
+                  <span>{s.text}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <p class="intro again">…and round again.</p>
+      </div>
+
+      <h2 class="rh examples">Examples</h2>
+      <ul class="cards">
+        {
+          projects.map((p) => (
+            <li>
+              <CardIcon name={p.data.icon} />
+              <a class="card-link" href={`${base}/making/${p.data.case}/`}>
+                <strong>{p.data.title}</strong>
+              </a>
+              <p>{p.data.summary}</p>
+              <span class="tags">{p.data.tags.map((t) => <span>{t}</span>)}</span>
+              <span class="go" aria-hidden="true">Read the case study →</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="intro">I also build small things for family and friends.</p>
+      <p class="back"><a href={`${base}/#ideas`}>← Back to the three ideas</a></p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,11 @@
+name: Explain it to me like I'm a model
+group: more
+aliases:
+  - explain --like-im-a-model
+  - explain
+  - explain it to me like im a model
+output: |-
+
+  Be explicit. Preserve context. Retrieve rather than infer.
+  Reduce effort; do not optimise for sounding clever.
+  If you make a mistake, say how it happened.

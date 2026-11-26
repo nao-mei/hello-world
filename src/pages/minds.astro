@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import FitsMoreMinds from '../components/diagrams/FitsMoreMinds.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const idea = (await getCollection('problems')).find((p) => p.id === 'fits-more-minds');
+const awards = (await getCollection('recognition')).filter((r) => r.data.kind === 'award').sort((a, b) => b.data.year - a.data.year);
+// Draft wording, for the owner to review before publishing.
+---
+
+<Base title="Fits more minds">
+  <section class="slide" aria-labelledby="h-minds">
+    <div class="wrap prose-page">
+      <p class="kick"><i></i> 03 · Fits more minds</p>
+      <h1 id="h-minds">Not everyone the <span class="mut">same</span></h1>
+      <div class="head-split">
+        <p class="lede">{idea?.data.summary}</p>
+        <figure class="fig mini-head"><FitsMoreMinds /></figure>
+      </div>
+
+      <h2>Different minds, different routes</h2>
+      <p>
+        People think, learn, communicate and work in different ways. Neurodivergent people, people of different ages, different genders, people from different backgrounds. A team where everyone is the same tends to have the same ideas. Innovation, and real change, tend to come when different minds and different experiences meet.
+      </p>
+
+      <h2>Accessible and fair, by design</h2>
+      <p>
+        Good processes and tools offer more than one way to reach the same outcome, instead of one prescribed route that suits only some of us. That is not a favour to anyone. It is how you get the whole team's thinking, and it is how people can do their best work.
+      </p>
+
+      <h2>What I have done about it</h2>
+      <ul class="plain">
+        <li>Helped lead and grow a diversity network for neurodivergent people, with peer communities, listening circles and ways for people to shape how things work.</li>
+        <li>Worked to design neuroinclusive meetings and processes, with more than one way to take part and the same information available to everyone.</li>
+        <li>Ran a survey on workplace adjustments and turned people's experiences into evidence for better support.</li>
+        <li>
+          Built an AI agent that helps people find adjustments, support and approaches that have worked for others.{' '}
+          <a href={`${base}/making/lived-experience-agent/`}>Read the case study</a>.
+        </li>
+        <li>Wrote practical guides on neurodivergence at work and on navigating ambiguity, based on what people said they were facing.</li>
+        <li>Spoke openly about neurodiversity at events, helping make different ways of thinking and working more visible and accepted.</li>
+      </ul>
+
+      <h2>Recognition</h2>
+      <ul class="rlist">
+        {
+          awards.map((r) => (
+            <li>
+              {r.data.href ? (
+                <a href={r.data.href} target="_blank" rel="noopener noreferrer"><strong>{r.data.title}</strong></a>
+              ) : (
+                <strong>{r.data.title}</strong>
+              )}
+              <span class="years">{r.data.issuer}, {r.data.year}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="back"><a href={`${base}/#ideas`}>← Back to the three ideas</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prose-page > :not(.head-split) { max-width: 46rem; }
+  .prose-page :global(.lede) { font-size: 1.2rem; color: var(--fg); margin: 1.25rem 0 1.5rem; line-height: 1.55; }
+  h2 { margin: 2.5rem 0 0.5rem; }
+  p, li { line-height: 1.65; }
+  .plain { padding-left: 1.2rem; }
+</style>

@@ -1,0 +1,9 @@
+name: Where do you work?
+group: more
+aliases:
+  - employer
+  - who do you work for
+keywords: [work, employer, company, job, role, career, title]
+output: |-
+
+  My career is on the Career page, from service management to AI.

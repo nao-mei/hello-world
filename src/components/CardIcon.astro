@@ -1,0 +1,42 @@
+---
+// One small blue icon per example card. Original drawings; they hint at what the thing is and carry no meaning on their own.
+interface Props { name: 'agent' | 'workbench' | 'guide' | 'certificate' }
+const { name } = Astro.props;
+---
+
+<svg class="card-icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+  {name === 'agent' && (
+    <g>
+      <circle cx="20" cy="20" r="5" class="fill" />
+      <path d="M20 15 V6 M24 23 L33 29 M16 23 L7 29" />
+      <circle cx="20" cy="6" r="3" /><circle cx="33" cy="30" r="3" /><circle cx="7" cy="30" r="3" />
+    </g>
+  )}
+  {name === 'workbench' && (
+    <g>
+      <rect x="5" y="6" width="30" height="28" />
+      <path d="M11 14 H29 M11 20 H29 M11 26 H29" />
+      <circle cx="16" cy="14" r="2.6" class="fill" /><circle cx="24" cy="20" r="2.6" class="fill" /><circle cx="19" cy="26" r="2.6" class="fill" />
+    </g>
+  )}
+  {name === 'guide' && (
+    <g>
+      <path d="M20 10 C14 7 9 7 5 8 V30 C9 29 14 29 20 32 C26 29 31 29 35 30 V8 C31 7 26 7 20 10 Z" />
+      <path d="M20 10 V32" />
+      <path d="M10 14 H16 M10 19 H16 M24 14 H30 M24 19 H30" />
+    </g>
+  )}
+  {name === 'certificate' && (
+    <g>
+      <path d="M12 6 H28 L36 20 L28 34 H12 L4 20 Z" />
+      <path d="M13 20.5 L18 25.5 L27 15" class="tick" />
+    </g>
+  )}
+</svg>
+
+<style>
+  .card-icon { display: block; color: var(--accent); }
+  .card-icon :global(*) { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .card-icon :global(.fill) { fill: currentColor; }
+  .card-icon :global(.tick) { stroke-width: 2.2; }
+</style>

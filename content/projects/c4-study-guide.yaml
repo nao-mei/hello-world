@@ -1,0 +1,11 @@
+title: C⁴ study guide
+order: 3
+icon: guide
+case: c4-study-guide
+link: https://nao-mei.github.io/c4-study/
+tags:
+  - Built with Claude
+  - Runs in your browser
+summary: >-
+  A study aid for Claude's certification exams, built with Claude's help. I used it to pass the Developer and Architect – Professional
+  exams. It runs entirely in your browser, with no accounts and nothing sent anywhere.

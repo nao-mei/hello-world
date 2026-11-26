@@ -1,0 +1,8 @@
+name: exit
+aliases:
+  - quit
+  - q
+hidden: true
+output: |-
+
+  There is no exit. There is only Esc.

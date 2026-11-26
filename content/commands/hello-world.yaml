@@ -1,0 +1,11 @@
+name: hello world
+group: fun
+aliases:
+  - hello, world
+  - hello world!
+  - helloworld
+  - "hello, world!"
+output: |-
+
+  Hello, world.
+  The first program anyone writes, and the last thing I check before shipping.
